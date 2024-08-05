@@ -1,0 +1,27 @@
+version: '3'
+services:
+    webapp:
+      build: ./webapp
+    keycloak:
+      build: ./keycloak
+      ports:
+        - 8080:8080
+      environment:
+        PROXY_ADDRESS_FORWARDING: "true"
+    redis:
+      image: "redis:alpine"
+    openresty:
+        build: ./openresty
+        restart: unless-stopped
+        ports:
+            - 80:80
+        volumes:
+            - ./openresty/conf:/usr/local/openresty/nginx/conf/
+            - ./openresty/main.lua:/usr/local/openresty/main.lua
+        depends_on:
+            - webapp
+            - keycloak
+            - redis
+
+
+
