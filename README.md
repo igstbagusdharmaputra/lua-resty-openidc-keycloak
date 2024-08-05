@@ -5,8 +5,7 @@ This is an implementation of a gateway “service” using OpenResty. OpenResty 
 
 ## Run
 ```
-$ docker-compose build
-$ docker-compose up -d
+$ docker-compose up --build -d
 ```
 
 ## Usage
